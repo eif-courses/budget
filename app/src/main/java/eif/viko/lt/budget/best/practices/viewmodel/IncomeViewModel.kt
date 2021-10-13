@@ -13,8 +13,11 @@ import javax.inject.Inject
 @HiltViewModel
 class IncomeViewModel @Inject constructor(api: IncomeApi) : ViewModel() {
 
+
+    //@Inject lateinit var apiaa: IncomeApi
+
     private val incomesLiveData = MutableLiveData<List<Income>>()
-    val incomes = incomesLiveData
+    val incomes:LiveData<List<Income>> = incomesLiveData
 
     init {
         viewModelScope.launch {

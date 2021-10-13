@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.View.OnClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.bumptech.glide.Glide
 import eif.viko.lt.budget.best.practices.R
 import eif.viko.lt.budget.best.practices.data.Income
 import eif.viko.lt.budget.best.practices.databinding.ActivityMainBinding
@@ -35,29 +36,35 @@ class IncomeListAdapter(private val interaction: Interaction? = null) :
 
         init {
             binding.root.setOnClickListener(this)
-
+            binding.image.setOnClickListener(this)
         //itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             if (adapterPosition == RecyclerView.NO_POSITION) return
-            val clicked = getItem(adapterPosition)
+            val clicked:Income = getItem(adapterPosition)
             when(v){
-                binding.image -> interaction?.clickOnIncome(clicked)
+                binding.image -> interaction?.clickOnImage(clicked)
                 else -> interaction?.clickOnIncome(clicked)
             }
         }
 
         fun bind(item: Income) = with(binding) {
             // TODO: Bind the data with View
+
+            // TODO BIND IMAGE USING GLIDE
+            Glide.with(itemView)
+                .load(item.image)
+                .into(image)
             name.text = item.name
             amount.text = item.amount.toString()
-            // TODO BIND IMAGE USING GLIDE
+
         }
     }
 
     interface Interaction {
         fun clickOnIncome(income: Income)
+        fun clickOnImage(income: Income)
     }
 
     private class IncomeDC : DiffUtil.ItemCallback<Income>() {

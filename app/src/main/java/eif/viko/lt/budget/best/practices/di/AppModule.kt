@@ -15,15 +15,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit =
-        Retrofit.Builder()
+    fun provideRetrofit() = Retrofit.Builder()
             .baseUrl(IncomeApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     @Provides
     @Singleton
-    fun provideIncomeApi(retrofit: Retrofit):IncomeApi =
-        retrofit.create(IncomeApi::class.java)
+    fun provideIncomeApi(retrofit: Retrofit) = retrofit.create(IncomeApi::class.java)
 
 }
