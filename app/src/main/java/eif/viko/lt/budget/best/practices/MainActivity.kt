@@ -26,10 +26,5 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             .setupWithNavController(navController)
 
-        val emojis = resources.getStringArray(R.array.emojis)
-
-        emojis.forEach {
-            println(it)
-        }
     }
 }
